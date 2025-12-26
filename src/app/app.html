@@ -1,0 +1,352 @@
+<!-- Loading Animation -->
+<app-loading></app-loading>
+
+<div *ngIf="showMainContent()">
+    <!-- Header -->
+    <header class="header" [class.scrolled]="isScrolled()">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-text">C63 AMG</span>
+                <div class="logo-glow"></div>
+            </div>
+
+            <nav class="nav" [class.active]="menuOpen()">
+                <a href="#home" (click)="closeMenu()">Home</a>
+                <a href="#about" (click)="closeMenu()">About</a>
+                <a href="#gallery" (click)="closeMenu()">Gallery</a>
+                <a href="#specs" (click)="closeMenu()">Specs</a>
+                <a href="#experience" (click)="closeMenu()">Experience</a>
+            </nav>
+            <button class="burger-menu" (click)="toggleMenu()" [class.active]="menuOpen()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="particles"></div>
+            <div class="floating-elements">
+                <div class="float-element" style="--delay: 0s; --duration: 20s;"></div>
+                <div class="float-element" style="--delay: 5s; --duration: 25s;"></div>
+                <div class="float-element" style="--delay: 10s; --duration: 30s;"></div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">Mercedes-Benz</div>
+            <h1 class="hero-title">
+                <span class="title-line">C63</span>
+                <span class="title-line highlight">AMG</span>
+            </h1>
+            <p class="hero-subtitle">Power, Style, Perfection</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" (click)="scrollToSection('gallery')">
+                    Explore Gallery
+                </button>
+                <button class="btn btn-secondary" routerLink="/information">
+                    More Information
+                </button>
+            </div>
+
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+        </div>
+    </section>
+
+    <!-- 3D Cube Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">3D Gallery</h2>
+                <p class="section-subtitle">Drag the cube to view the car from every angle</p>
+            </div>
+            <div class="cube-container">
+                <div class="scene">
+                    <div class="cube" #cubeElement>
+                        <div class="face front"></div>
+                        <div class="face back"></div>
+                        <div class="face right"></div>
+                        <div class="face left"></div>
+                        <div class="face top"></div>
+                        <div class="face bottom"></div>
+                    </div>
+                </div>
+                <div class="cube-glow"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-background">
+            <div class="animated-grid"></div>
+            <div class="floating-particles">
+                <div class="particle" *ngFor="let i of [1,2,3,4,5,6,7,8]" [style.animation-delay.s]="i * 0.5"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="section-badge">Excellence</div>
+                    <h2 class="section-title animated-title">
+                        <span class="title-word">About</span>
+                        <span class="title-accent">C63 AMG</span>
+                    </h2>
+                    <div class="description-wrapper">
+                        <p class="about-description fade-in-text">
+                            The Mercedes-Benz C63 AMG is a powerful sports sedan that combines
+                            <span class="highlight-text">German engineering excellence</span> with the
+                            <span class="highlight-text">raw power</span> of an American V8 engine.
+                        </p>
+                        <p class="about-description fade-in-text delay-1">
+                            This is a car designed to give you a
+                            <span class="highlight-text">unique experience</span> on every road.
+                            Every detail, every line, every sound - everything is created for
+                            <span class="highlight-text">perfection</span>.
+                        </p>
+                    </div>
+
+                </div>
+                <div class="about-image">
+                    <div class="image-3d-container">
+                        <div class="image-wrapper">
+                            <div class="image-glow"></div>
+                            <div class="image-reflection"></div>
+                            <div class="sparkle sparkle-1"></div>
+                            <div class="sparkle sparkle-2"></div>
+                            <div class="sparkle sparkle-3"></div>
+                            <div class="sparkle sparkle-4"></div>
+                            <div class="sparkle sparkle-5"></div>
+                        </div>
+                        <div class="floating-badge badge-1">
+                            <span>V8</span>
+                        </div>
+                        <div class="floating-badge badge-2">
+                            <span>AMG</span>
+                        </div>
+                        <div class="floating-badge badge-3">
+                            <span>469 HP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card" *ngFor="let feature of features(); let i = index"
+                    [style.animation-delay.ms]="i * 100" (click)="openFeatureModal(feature)">
+                    <div class="feature-icon-wrapper">
+                        <ng-container [ngSwitch]="feature.icon">
+                            <!-- Engine Icon -->
+                            <svg *ngSwitchCase="'engine'" class="feature-icon" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <!-- Transmission Icon -->
+                            <svg *ngSwitchCase="'transmission'" class="feature-icon" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" />
+                                <path d="M12 1V6M12 18V23M23 12H18M6 12H1" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <!-- Suspension Icon -->
+                            <svg *ngSwitchCase="'suspension'" class="feature-icon" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 12H21M12 3V21M6 6L12 12L18 6M6 18L12 12L18 18" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <!-- Modes Icon -->
+                            <svg *ngSwitchCase="'modes'" class="feature-icon" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                                <path d="M12 2L15 8L22 9L17 14L18 21L12 18L6 21L7 14L2 9L9 8L12 2Z"
+                                    stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                            </svg>
+                            <!-- Interior Icon -->
+                            <svg *ngSwitchCase="'interior'" class="feature-icon" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor"
+                                    stroke-width="2" />
+                                <path d="M9 6V4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V6"
+                                    stroke="currentColor" stroke-width="2" />
+                                <circle cx="8" cy="12" r="1" fill="currentColor" />
+                                <circle cx="16" cy="12" r="1" fill="currentColor" />
+                            </svg>
+                            <!-- Sound Icon -->
+                            <svg *ngSwitchCase="'sound'" class="feature-icon" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 15V9C3 8.44772 3.44772 8 4 8H7L12 3V21L7 16H4C3.44772 16 3 15.5523 3 15Z"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M17 9C18.1046 9 19 9.89543 19 11C19 12.1046 18.1046 13 17 13"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                        </ng-container>
+                    </div>
+                    <h3 class="feature-title">{{ feature.title }}</h3>
+                    <p class="feature-description">{{ feature.description }}</p>
+                    <div class="feature-hover-text">Click to learn more</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Modal -->
+    <div class="modal-overlay" [class.active]="isModalOpen()" (click)="closeModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()" *ngIf="selectedFeature()">
+            <button class="modal-close" (click)="closeModal()">×</button>
+            <div class="modal-image">
+                <img [src]="selectedFeature()?.image" [alt]="selectedFeature()?.title">
+            </div>
+            <div class="modal-info">
+                <h2>{{ selectedFeature()?.title }}</h2>
+                <p class="modal-description">{{ selectedFeature()?.description }}</p>
+                <p class="modal-details">{{ selectedFeature()?.details }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Specifications Section -->
+    <section id="specs" class="specs-section">
+        <div class="container">
+            <h2 class="section-title">Technical Specifications</h2>
+            <div class="specs-interactive">
+                <div class="specs-car-image">
+                    <img src="https://wieck-mbusa-production.s3.amazonaws.com/photos/34f6f0fc50a1d666084e3c003556a794bed180b5/preview-928x522.jpg"
+                        alt="Mercedes C63 AMG" class="car-spec-image">
+
+                    <!-- Interactive Spec Points -->
+                    <div class="spec-point" *ngFor="let spec of specifications(); let i = index"
+                        [style.left.%]="getSpecPointPosition(i).x" [style.top.%]="getSpecPointPosition(i).y"
+                        [class.active]="hoveredSpec() === i" (mouseenter)="hoveredSpec.set(i)"
+                        (mouseleave)="hoveredSpec.set(null)">
+                        <div class="spec-point-dot"></div>
+                        <div class="spec-point-line"></div>
+                        <div class="spec-point-info">
+                            <div class="spec-point-label">{{ spec.label }}</div>
+                            <div class="spec-point-value">{{ spec.value }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience-section">
+        <div class="container">
+            <h2 class="section-title">Engineered to Thrill</h2>
+
+            <div class="experience-content">
+
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3>Handcrafted V8 Power</h3>
+                    <p>
+                        Each AMG V8 engine is hand-built by a single engineer, delivering raw power,
+                        instant response, and the iconic AMG exhaust sound.
+                    </p>
+                </div>
+
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3>AMG Driving Dynamics</h3>
+                    <p>
+                        Advanced suspension, rear-wheel bias, and multiple drive modes give you full
+                        control — from daily comfort to track-ready aggression.
+                    </p>
+                </div>
+
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2
+                            C6.47715 2 2 6.47715 2 12
+                            C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" />
+                            <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <h3>Luxury Meets Performance</h3>
+                    <p>
+                        Premium materials, digital cockpit, and AMG-specific details create an interior
+                        that feels as powerful as it looks.
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Relaxation Section -->
+    <section class="relaxation-section">
+        <div class="relaxation-background">
+            <div class="relaxation-particles">
+                <div class="particle" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [style.animation-delay.s]="i * 0.3">
+                </div>
+            </div>
+            <div class="relaxation-gradient"></div>
+        </div>
+        <div class="container">
+            <div class="relaxation-content">
+                <div class="relaxation-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="12" cy="12" r="3" fill="currentColor" />
+                    </svg>
+                </div>
+                <h2 class="relaxation-title">Immerse Yourself</h2>
+                <p class="relaxation-subtitle">Experience the C63 AMG in a whole new way. Discover detailed information,
+                    stunning visuals, and immersive content.</p>
+                <a routerLink="/information" class="relaxation-button">
+                    <span class="button-text">Explore Information</span>
+                    <span class="button-arrow">→</span>
+                    <div class="button-glow"></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <!-- Bottom -->
+        <div class="footer-bottom">
+            <p>&copy; 2024 Mercedes-Benz C63 AMG. All rights reserved.</p>
+        </div>
+
+    </footer>
+</div>
+
+<router-outlet></router-outlet>
